@@ -13,7 +13,7 @@ file_share_mnt_path="/nas101/dave"
 
 mnt_path_check="0"
 
-rsync_opts="-abh --progress "
+rsync_opts="-abh --info=progress2 "
 
 if [ "$limit_band" = "1" ]; then
 rsync_opts="${rsync_opts} --bwlimit=$max_band "
@@ -43,5 +43,6 @@ sleep 10
 exit 1
 fi
 
+echo xterm -geometry 60x1+1+1 -T "Copying $TR_TORRENT_NAME" -e  "rsync $rsync_opts '$TR_TORRENT_DIR/$TR_TORRENT_NAME' '$save_path'" >> /tmp/copylog
 
-xterm -e  "rsync $rsync_opts '$TR_TORRENT_DIR/$TR_TORRENT_NAME' '$save_path'" 1>&2
+xterm -geometry 60x1+1+1 -T "Copying $TR_TORRENT_NAME" -e  "rsync $rsync_opts '$TR_TORRENT_DIR/$TR_TORRENT_NAME' '$save_path'" 1>&2
